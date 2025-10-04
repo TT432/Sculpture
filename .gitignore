@@ -1,0 +1,35 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+runs
+run-data
+
+repo
+
+任务.md
+相机功能测试指南.md
+forge-1.20.1-47.4.0_mapped_official_1.20.1-sources
+forge-1.20.1-47.4.0-sources
+.AddCompLib
+.vscode
+logs
+文档

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "yiseyo.sculpture.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "sculpture.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "EmptyTextureStateShardMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
