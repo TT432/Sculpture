@@ -21,9 +21,10 @@ public abstract class MeshCompressor {
 
         mesh.forEach(
                 (rt, verts) -> {
-                    LayerManager.writeHeader(rt, buf); // 2. RenderType 头部
-                    buf.writeVarInt(verts.size()); // 3. 顶点计数
-                    verts.forEach(v -> writeVertex(buf, v)); // 4. 顶点序列
+                    if (LayerManager.writeHeader(rt, buf)) { // 2. RenderType 头部
+                        buf.writeVarInt(verts.size()); // 3. 顶点计数
+                        verts.forEach(v -> writeVertex(buf, v)); // 4. 顶点序列
+                    }
                 });
 
         // 拷贝结果
@@ -40,12 +41,14 @@ public abstract class MeshCompressor {
 
         for (int i = 0; i < layerCount; i++) {
             RenderType rt = LayerManager.readHeader(buf); // 1. 读头部 → 得到 RenderType
-            int vCount = buf.readVarInt(); // 2. 顶点计数
-            List<Vertex> vs = new ArrayList<>(vCount);
+            if (rt != null) {
+                int vCount = buf.readVarInt(); // 2. 顶点计数
+                List<Vertex> vs = new ArrayList<>(vCount);
 
-            for (int j = 0; j < vCount; j++) vs.add(readVertex(buf)); // 3. 顶点序列
+                for (int j = 0; j < vCount; j++) vs.add(readVertex(buf)); // 3. 顶点序列
 
-            mesh.put(rt, vs);
+                mesh.put(rt, vs);
+            }
         }
 
         return new CaptureResult(mesh);
